@@ -1,3 +1,6 @@
+### Clonar repositorio
+git clone https://github.com/CarlosCastillo10/DBRepository.git
+
 #### Actualizar las ramas
 Si acabas de clonar el repositorio, no necesitas hacer esto, pero si no, simplemente tienes que hacer lo siguiente **para cada rama**:
 
