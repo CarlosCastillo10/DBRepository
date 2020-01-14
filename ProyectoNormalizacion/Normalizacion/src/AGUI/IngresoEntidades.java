@@ -5,8 +5,14 @@
  */
 package AGUI;
 
+import BLOGICA.VerificarDatos;
 import CLASES.Atributo;
+import CLASES.Entidad;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +23,10 @@ import javax.swing.table.DefaultTableModel;
 public class IngresoEntidades extends javax.swing.JFrame {
 
     int rowSel = -1;
-    ArrayList<Atributo> ArrayAtributos = new ArrayList<Atributo>();
+    ArrayList<Entidad> ArrayEntidades = new ArrayList<Entidad>();
+    Atributo ObjAtr = new Atributo();
+    Entidad ObjEnt = new Entidad();
+    VerificarDatos VerDat = new VerificarDatos();
     
     public IngresoEntidades() {
         initComponents();
@@ -70,6 +79,7 @@ public class IngresoEntidades extends javax.swing.JFrame {
                 "Title 1"
             }
         ));
+        jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 370, 130));
@@ -109,7 +119,18 @@ public class IngresoEntidades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+        ObjEnt.atributos.clear();
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            String Atributo = jTable1.getValueAt(i, 0).toString();
+            ObjEnt.AgregarAtributos(Atributo);
+        }
+        
+        
+            if(VerDat.buscarPalabrasRepetidas(ObjEnt) == true){
+                JOptionPane.showMessageDialog(null, "Se han encontrado elementos repetidos. Eliminelos e intente de nuevo", "Atencion", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                //de aqui se continua el codigo, a este punto ya estan ingresados los datos en el objeto y se esta verificado que no esten repetidos
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
