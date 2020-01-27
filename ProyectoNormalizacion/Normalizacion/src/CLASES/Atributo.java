@@ -12,7 +12,8 @@ package CLASES;
 public class Atributo {
     
     private String nombre;
-
+    
+    
     public Atributo() {
     }
 
@@ -27,7 +28,11 @@ public class Atributo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
+    @Override
+    public String toString() {
+        return  nombre;
+    }
     
     
 }

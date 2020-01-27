@@ -12,14 +12,22 @@ import java.util.*;
  */
 public class Entidad {
     
-    private ArrayList<Atributo> atributos = new ArrayList<Atributo>();
+    public ArrayList<Atributo> atributos = new ArrayList<Atributo>();
 
     public Entidad() {
     }
     
-    public Entidad(ArrayList<Atributo> atributos) {
-        this.atributos = atributos;
+    public Entidad(String Atributo) {
+        this.atributos.add(new Atributo(Atributo));
     }
+    
+    public void AgregarAtributos(String Atributo){
+        this.atributos.add(new Atributo(Atributo));
+    }
+    
+    /*public Entidad(ArrayList<Atributo> atributos) {
+        this.atributos = atributos;
+    }*/
 
     public ArrayList<Atributo> getAtributos() {
         return atributos;
@@ -28,9 +36,11 @@ public class Entidad {
     public void setAtributos(ArrayList<Atributo> atributos) {
         this.atributos = atributos;
     }
-    
-    
-    
+
+  @Override
+    public String toString() {
+        return "Atributos{" + atributos + '}';
+    }
     
     
 }
