@@ -7,6 +7,7 @@ package LOGICA;
 
 import CLASES.Atributo;
 import CLASES.Entidad;
+import DATA.DataImportar;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,9 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author carlo
  */
 public class BLImportarData {
-
-    //public DefaultTableModel modeloClavesCandidatas = new DefaultTableModel();
-    //public DefaultTableModel modeloClavesPrimarias = new DefaultTableModel();
 
     public void obtenerClavesCandidatas(JTable tableClavesCandidatas, Entidad objEntidad) {
         Object[] columnas = {""};
@@ -53,12 +51,30 @@ public class BLImportarData {
         tableClavesCandidatas.setModel(modeloClavesCandidatas);
     }
     
-    public void importarData(JTable tableUniversal){
+    public void importarData(JTable tableUniversal,ArrayList<Atributo> clavesPrimarias){
         DefaultTableModel modelo = new DefaultTableModel();
-        for (Atributo objAtributo : GLOBAL.GlobalVariables.entidadUniversal.getAtributos()) {
+        for (int i = 0; i < clavesPrimarias.size(); i++) {
+            for (int j = 0; j < DataImportar.atributos.size(); j++){
+                if(clavesPrimarias.get(i).getNombre().equals(DataImportar.atributos.get(j).getNombre())){
+                    DataImportar.atributos.get(j).setPrimaryKey(true);
+                    DataImportar.atributos.get(j).setNombre(DataImportar.atributos.get(j).getNombre()+" (PK)");
+                }
+            } 
+        }
+        for (Atributo objAtributo : DataImportar.atributos) {
             modelo.addColumn(objAtributo);
         }
+        for (int i = 0; i <DataImportar.atributos.get(0).getValores().size(); i++) {
+            String[] NewValor = new String[DataImportar.atributos.size()];
+            for (int j = 0; j < DataImportar.atributos.size(); j++){
+                NewValor[j] = DataImportar.atributos.get(j).getValores().get(i);
+            }     
+            modelo.addRow(NewValor);
+        }
         tableUniversal.setModel(modelo);
+        
+        
     }
+    
 
 }

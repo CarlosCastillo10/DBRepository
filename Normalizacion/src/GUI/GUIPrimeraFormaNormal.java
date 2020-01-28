@@ -6,22 +6,41 @@
 package GUI;
 
 import LOGICA.BLImportarData;
+import java.util.*;
+import CLASES.Atributo;
+import LOGICA.BLPrimeraFormaNormal;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author carlo
  */
-public class GUIPrimeraFormaNormal extends javax.swing.JFrame {
+public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
 
     /**
      * Creates new form GUIPrimeraFormaNormal
      */
     BLImportarData objBLImportarData = new BLImportarData();
-    public GUIPrimeraFormaNormal() {
+    BLPrimeraFormaNormal  objBLPrimeraFormaNormal = new BLPrimeraFormaNormal();
+    ArrayList<Atributo> arrayCamposSeleccionados = new ArrayList<>();
+    ArrayList<Atributo> arrayCamposRepeticion = new ArrayList<>();
+    int numCamposRepeticion = 0;
+    int numCamposSeleccionados = 0;
+    
+    public GUIPrimeraFormaNormal(ArrayList<Atributo> clavesPrimarias) {
         initComponents();
         this.setLocationRelativeTo(null);
-        objBLImportarData.importarData(this.jTableUniversal);
+        objBLImportarData.importarData(this.jTableUniversal,clavesPrimarias);
+        arrayCamposRepeticion = objBLPrimeraFormaNormal.obtenerCamposRepeticion(this.jTableCamposRepeticion);
+        numCamposRepeticion = arrayCamposRepeticion.size();
+        activarComponentes();
     }
+
+    private GUIPrimeraFormaNormal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +54,21 @@ public class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableUniversal = new javax.swing.JTable();
         jLabelEntidadUniversal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableCamposRepeticion = new javax.swing.JTable();
+        jButtonElegir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableCamposSeleccionados = new javax.swing.JTable();
+        jButtonEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEntidad3 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableEntidad1 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableEntidad2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -57,15 +91,175 @@ public class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableUniversal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 930, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 890, 130));
 
         jLabelEntidadUniversal.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabelEntidadUniversal.setText("TABLA UNIVERSAL");
         getContentPane().add(jLabelEntidadUniversal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 330, 40));
 
+        jLabel2.setText("Escojer los campos de los grupos de repeticion");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 20));
+
+        jTableCamposRepeticion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTableCamposRepeticion.setEnabled(false);
+        jScrollPane4.setViewportView(jTableCamposRepeticion);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 130, 140));
+
+        jButtonElegir.setText("Elegir -->");
+        jButtonElegir.setEnabled(false);
+        jButtonElegir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonElegirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonElegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 140, -1));
+
+        jLabel1.setText("Campos Seleccionados");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, 20));
+
+        jTableCamposSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jTableCamposSeleccionados.setEnabled(false);
+        jScrollPane5.setViewportView(jTableCamposSeleccionados);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 130, 140));
+
+        jButtonEliminar.setText("<-- Eliminar");
+        jButtonEliminar.setEnabled(false);
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 450, 140, -1));
+
+        jButton1.setText("Aplicar 1ra Forma normal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, 260, 70));
+
+        jTableEntidad3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTableEntidad3);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, 310, 200));
+
+        jTableEntidad1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(jTableEntidad1);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 310, 200));
+
+        jTableEntidad2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(jTableEntidad2);
+
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 310, 200));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElegirActionPerformed
+        // TODO add your handling code here:
+ 
+        if (this.numCamposRepeticion !=0){
+            if(this.jTableCamposRepeticion.getSelectedRow() >= 0){
+                this.arrayCamposSeleccionados.add(this.arrayCamposRepeticion.get(this.jTableCamposRepeticion.getSelectedRow()));
+                this.numCamposSeleccionados = this.arrayCamposSeleccionados.size();
+                objBLImportarData.establecerClavesPrimarias(this.jTableCamposSeleccionados,this.arrayCamposSeleccionados);
+                this.arrayCamposRepeticion.remove(this.jTableCamposRepeticion.getSelectedRow());
+                this.numCamposRepeticion = this.arrayCamposRepeticion.size();
+                objBLImportarData.establecerClavesCandidatas(jTableCamposRepeticion, arrayCamposRepeticion);
+                //System.out.println("Clave candidata: "+ objEntidad.getAtributos().get((this.jTableClavesCandidatas.getSelectedRow() + numAtributoCandidato) + 1));
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe elegir algun campo de repeticion");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No existen campos de grupos repetidos");
+        }
+
+    }//GEN-LAST:event_jButtonElegirActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        // TODO add your handling code here:
+        if (this.numCamposSeleccionados !=0){
+            if(this.jTableCamposSeleccionados.getSelectedRow() >= 0){
+                this.arrayCamposRepeticion.add(this.arrayCamposSeleccionados.get(this.jTableCamposSeleccionados.getSelectedRow()));
+                this.numCamposRepeticion = this.arrayCamposRepeticion.size();
+                objBLImportarData.establecerClavesCandidatas(this.jTableCamposRepeticion,this.arrayCamposRepeticion);
+                this.arrayCamposSeleccionados.remove(this.jTableCamposSeleccionados.getSelectedRow());
+                this.numCamposSeleccionados = this.arrayCamposSeleccionados.size();
+                objBLImportarData.establecerClavesPrimarias(jTableCamposSeleccionados, arrayCamposSeleccionados);
+
+                //System.out.println("Clave candidata: "+ objEntidad.getAtributos().get((this.jTableClavesCandidatas.getSelectedRow() + numAtributoCandidato) + 1));
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe elegir algun campo disponible");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No existen campos disponibles");
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void activarComponentes(){
+        this.jButtonElegir.setEnabled(true);
+        this.jButtonEliminar.setEnabled(true);
+        this.jTableCamposRepeticion.setEnabled(true);
+        this.jTableCamposSeleccionados.setEnabled(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -102,8 +296,23 @@ public class GUIPrimeraFormaNormal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonElegir;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelEntidadUniversal;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTableCamposRepeticion;
+    private javax.swing.JTable jTableCamposSeleccionados;
+    private javax.swing.JTable jTableEntidad1;
+    private javax.swing.JTable jTableEntidad2;
+    private javax.swing.JTable jTableEntidad3;
     public javax.swing.JTable jTableUniversal;
     // End of variables declaration//GEN-END:variables
 }

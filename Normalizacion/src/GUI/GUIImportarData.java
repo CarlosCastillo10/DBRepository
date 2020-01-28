@@ -7,7 +7,6 @@ package GUI;
 
 import CLASES.Atributo;
 import CLASES.Entidad;
-import java.io.*;
 import DATA.DataImportar;
 import LOGICA.BLAtributo;
 import LOGICA.BLImportarData;
@@ -15,7 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -175,10 +173,8 @@ public class GUIImportarData extends javax.swing.JFrame {
                 //ALT + 124 ||
                 if(archivo.getName().endsWith("xls")||archivo.getName().endsWith("xlsx")){
                     objEntidad = objDataImportar.Importar(archivo,this.jTableUniversal);
-                    objAuxEntidad = objEntidad;
-                    GLOBAL.GlobalVariables.entidadUniversal = objEntidad;
-                    objBLImportarData.obtenerClavesCandidatas(jTableClavesCandidatas, objAuxEntidad);
-                    this.arrayClavesCandidatas = objAuxEntidad.getAtributos();
+                    objBLImportarData.obtenerClavesCandidatas(jTableClavesCandidatas, objEntidad);
+                    this.arrayClavesCandidatas = objEntidad.getAtributos();
                     this.numClavesCandidatas = this.arrayClavesCandidatas.size();
                     activarComponentes();
                     
@@ -190,6 +186,7 @@ public class GUIImportarData extends javax.swing.JFrame {
 
     private void jButtonElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElegirActionPerformed
         // TODO add your handling code here:
+        objAuxEntidad = objEntidad;
         if (this.numClavesCandidatas !=0){
             if(this.jTableClavesCandidatas.getSelectedRow() >= 0){
                 this.arrayClavesPrimarias.add(this.arrayClavesCandidatas.get(this.jTableClavesCandidatas.getSelectedRow()));
@@ -198,7 +195,6 @@ public class GUIImportarData extends javax.swing.JFrame {
                 this.arrayClavesCandidatas.remove(this.jTableClavesCandidatas.getSelectedRow());
                 this.numClavesCandidatas = this.arrayClavesCandidatas.size();
                 objBLImportarData.establecerClavesCandidatas(jTableClavesCandidatas, arrayClavesCandidatas);
-                
                 //System.out.println("Clave candidata: "+ objEntidad.getAtributos().get((this.jTableClavesCandidatas.getSelectedRow() + numAtributoCandidato) + 1));
             }else{
                 JOptionPane.showMessageDialog(null, "Debe elegir alguna clave candidata");
@@ -239,8 +235,8 @@ public class GUIImportarData extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Debe selccionar al menos 1 clave primaria");
             else{
                 if(objBLAtributo.validarClavePrimaria(this.arrayClavesPrimarias)){
-                    objAuxEntidad.setNombre(this.jTextFieldNombreEntidad.getText());
-                    GUIPrimeraFormaNormal objGUIPrimeraFormaNormal = new GUIPrimeraFormaNormal();
+                    objEntidad.setNombre(this.jTextFieldNombreEntidad.getText());
+                    GUIPrimeraFormaNormal objGUIPrimeraFormaNormal = new GUIPrimeraFormaNormal(this.arrayClavesPrimarias);
                     objGUIPrimeraFormaNormal.setVisible(true);
                     this.setVisible(false);  
                 }else{

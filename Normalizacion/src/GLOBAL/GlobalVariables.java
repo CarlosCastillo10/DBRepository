@@ -5,12 +5,16 @@
  */
 package GLOBAL;
 
+import CLASES.Atributo;
 import CLASES.Entidad;
+import java.util.*;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author carlo
  */
 public class GlobalVariables {
-    public static Entidad entidadUniversal = null;
+    public static DefaultTableModel modelo = new DefaultTableModel();
 }
