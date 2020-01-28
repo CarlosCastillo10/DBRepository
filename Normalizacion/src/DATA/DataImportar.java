@@ -66,7 +66,7 @@ public class DataImportar {
                             switch (celda.getCellType()){
                                 case Cell.CELL_TYPE_NUMERIC:
                                     ListaColumna[IndiceColumna]=(int)Math.round(celda.getNumericCellValue());
-                                    valor = ""+celda.getNumericCellValue();
+                                    valor = String.format("%.0f",celda.getNumericCellValue());
                                     break;
                                 case Cell.CELL_TYPE_STRING:
                                     ListaColumna[IndiceColumna]=celda.getStringCellValue();
@@ -97,7 +97,7 @@ public class DataImportar {
             objEntidad = new Entidad("Universal", arrayAtributos);
             for (Atributo objAtributo:arrayAtributos) {
                     atributos.add(objAtributo);
-                }
+            }
             mensaje="Importacion Exitosa";
             
         } catch (Exception e) {

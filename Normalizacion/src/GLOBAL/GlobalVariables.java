@@ -16,5 +16,5 @@ import javax.swing.table.DefaultTableModel;
  * @author carlo
  */
 public class GlobalVariables {
-    public static DefaultTableModel modelo = new DefaultTableModel();
+    public static Entidad entidadUniversal = new Entidad();
 }
