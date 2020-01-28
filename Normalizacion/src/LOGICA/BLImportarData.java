@@ -53,6 +53,14 @@ public class BLImportarData {
     
     public void importarData(JTable tableUniversal,ArrayList<Atributo> clavesPrimarias){
         DefaultTableModel modelo = new DefaultTableModel();
+        for (int i = 0; i < clavesPrimarias.size(); i++) {
+            for (int j = 0; j < DataImportar.atributos.size(); j++){
+                if(clavesPrimarias.get(i).getNombre().equals(DataImportar.atributos.get(j).getNombre())){
+                    DataImportar.atributos.get(j).setPrimaryKey(true);
+                    DataImportar.atributos.get(j).setNombre(DataImportar.atributos.get(j).getNombre()+" (PK)");
+                }
+            } 
+        }
         for (Atributo objAtributo : DataImportar.atributos) {
             modelo.addColumn(objAtributo);
         }
@@ -64,14 +72,7 @@ public class BLImportarData {
             modelo.addRow(NewValor);
         }
         tableUniversal.setModel(modelo);
-        for (int i = 0; i < clavesPrimarias.size(); i++) {
-            for (int j = 0; j < DataImportar.atributos.size(); j++){
-                if(clavesPrimarias.get(i).getNombre().equals(DataImportar.atributos.get(j).getNombre())){
-                    DataImportar.atributos.get(j).setPrimaryKey(true);
-                }
-            } 
-        }
-        System.out.println(DataImportar.atributos);
+        
         
     }
     
