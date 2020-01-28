@@ -72,8 +72,19 @@ public class BLImportarData {
             modelo.addRow(NewValor);
         }
         tableUniversal.setModel(modelo);
-        
-        
+            
+    }
+    
+    public void actualizarTablaUniversal(JTable tableUniversal,
+            ArrayList<Atributo> camposSeleccionados,ArrayList<Atributo> clavesPrimarias){
+        for (int i = 0; i <camposSeleccionados.size(); i++) {
+            for (int j = 0; j < DataImportar.atributos.size(); j++) {
+                if(camposSeleccionados.get(i).getNombre().equals(DataImportar.atributos.get(j).getNombre())){
+                    DataImportar.atributos.remove(j);
+                }
+            }
+        }
+        importarData(tableUniversal, clavesPrimarias);
     }
     
 

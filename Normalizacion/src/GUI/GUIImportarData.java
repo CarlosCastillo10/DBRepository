@@ -236,11 +236,13 @@ public class GUIImportarData extends javax.swing.JFrame {
             else{
                 if(objBLAtributo.validarClavePrimaria(this.arrayClavesPrimarias)){
                     objEntidad.setNombre(this.jTextFieldNombreEntidad.getText());
+                    GLOBAL.GlobalVariables.entidadUniversal = objEntidad;
                     GUIPrimeraFormaNormal objGUIPrimeraFormaNormal = new GUIPrimeraFormaNormal(this.arrayClavesPrimarias);
                     objGUIPrimeraFormaNormal.setVisible(true);
                     this.setVisible(false);  
                 }else{
-                    JOptionPane.showMessageDialog(null, "Los atributos seleccionados no pueden ser claves primarias");
+                    JOptionPane.showMessageDialog(null, "Los atributos seleccionados no pueden ser claves primarias, "
+                            + "pruebe con una clave compuesta");
                 }
             }
         }

@@ -10,6 +10,7 @@ import java.util.*;
 import CLASES.Atributo;
 import LOGICA.BLPrimeraFormaNormal;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -26,14 +27,19 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
     ArrayList<Atributo> arrayCamposRepeticion = new ArrayList<>();
     int numCamposRepeticion = 0;
     int numCamposSeleccionados = 0;
+    ArrayList<Atributo> clavesPrimarias = new ArrayList<>();
+    ArrayList<JTable> tablas = new ArrayList<>();
     
     public GUIPrimeraFormaNormal(ArrayList<Atributo> clavesPrimarias) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.clavesPrimarias = clavesPrimarias;
         objBLImportarData.importarData(this.jTableUniversal,clavesPrimarias);
         arrayCamposRepeticion = objBLPrimeraFormaNormal.obtenerCamposRepeticion(this.jTableCamposRepeticion);
         numCamposRepeticion = arrayCamposRepeticion.size();
+        obtenerTablas();
         activarComponentes();
+        //ocultarTablas();
     }
 
     private GUIPrimeraFormaNormal() {
@@ -62,13 +68,15 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableCamposSeleccionados = new javax.swing.JTable();
         jButtonEliminar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonPrimeraFormaNormal = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEntidad3 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEntidad1 = new javax.swing.JTable();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableEntidad2 = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableEntidad4 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,14 +99,14 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableUniversal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 890, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 680, 130));
 
         jLabelEntidadUniversal.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabelEntidadUniversal.setText("TABLA UNIVERSAL");
         getContentPane().add(jLabelEntidadUniversal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 330, 40));
 
         jLabel2.setText("Escojer los campos de los grupos de repeticion");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 20));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, 20));
 
         jTableCamposRepeticion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,7 +122,7 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         jTableCamposRepeticion.setEnabled(false);
         jScrollPane4.setViewportView(jTableCamposRepeticion);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 130, 140));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, 130, 140));
 
         jButtonElegir.setText("Elegir -->");
         jButtonElegir.setEnabled(false);
@@ -123,10 +131,10 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
                 jButtonElegirActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonElegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, 140, -1));
+        getContentPane().add(jButtonElegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 270, 140, -1));
 
         jLabel1.setText("Campos Seleccionados");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 80, -1, 20));
 
         jTableCamposSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +150,7 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         jTableCamposSeleccionados.setEnabled(false);
         jScrollPane5.setViewportView(jTableCamposSeleccionados);
 
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 130, 140));
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 110, 130, 140));
 
         jButtonEliminar.setText("<-- Eliminar");
         jButtonEliminar.setEnabled(false);
@@ -151,15 +159,15 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
                 jButtonEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 450, 140, -1));
+        getContentPane().add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 270, 140, -1));
 
-        jButton1.setText("Aplicar 1ra Forma normal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPrimeraFormaNormal.setText("Aplicar 1ra Forma normal");
+        jButtonPrimeraFormaNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonPrimeraFormaNormalActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, 260, 70));
+        getContentPane().add(jButtonPrimeraFormaNormal, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 350, 260, 70));
 
         jTableEntidad3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,7 +182,7 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableEntidad3);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, 310, 200));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 310, 200));
 
         jTableEntidad1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,8 +196,9 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
             }
         ));
         jScrollPane3.setViewportView(jTableEntidad1);
+        jTableEntidad1.getAccessibleContext().setAccessibleName("");
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 310, 200));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 310, 200));
 
         jTableEntidad2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,7 +213,22 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(jTableEntidad2);
 
-        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 540, 310, 200));
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 310, 200));
+
+        jTableEntidad4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(jTableEntidad4);
+
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 550, 310, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,15 +274,28 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonPrimeraFormaNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeraFormaNormalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        objBLPrimeraFormaNormal.aplicarPrimeraForma(arrayCamposSeleccionados, tablas,this.jTableUniversal,clavesPrimarias);
+    }//GEN-LAST:event_jButtonPrimeraFormaNormalActionPerformed
 
     public void activarComponentes(){
         this.jButtonElegir.setEnabled(true);
         this.jButtonEliminar.setEnabled(true);
         this.jTableCamposRepeticion.setEnabled(true);
         this.jTableCamposSeleccionados.setEnabled(true);
+    }
+    
+    public void obtenerTablas(){
+        tablas.add(this.jTableEntidad1);
+        tablas.add(this.jTableEntidad2);
+        tablas.add(this.jTableEntidad3);
+        tablas.add(this.jTableEntidad4);
+    }
+    public void ocultarTablas(){
+        for (JTable objJTable : tablas) {
+            objJTable.setVisible(false);
+        }
     }
     /**
      * @param args the command line arguments
@@ -296,9 +333,9 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonElegir;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonPrimeraFormaNormal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelEntidadUniversal;
@@ -308,11 +345,13 @@ public final class GUIPrimeraFormaNormal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableCamposRepeticion;
     private javax.swing.JTable jTableCamposSeleccionados;
     private javax.swing.JTable jTableEntidad1;
     private javax.swing.JTable jTableEntidad2;
     private javax.swing.JTable jTableEntidad3;
+    private javax.swing.JTable jTableEntidad4;
     public javax.swing.JTable jTableUniversal;
     // End of variables declaration//GEN-END:variables
 }
