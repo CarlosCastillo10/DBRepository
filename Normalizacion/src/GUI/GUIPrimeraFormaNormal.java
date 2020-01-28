@@ -6,6 +6,8 @@
 package GUI;
 
 import LOGICA.BLImportarData;
+import java.util.*;
+import CLASES.Atributo;
 
 /**
  *
@@ -17,11 +19,17 @@ public class GUIPrimeraFormaNormal extends javax.swing.JFrame {
      * Creates new form GUIPrimeraFormaNormal
      */
     BLImportarData objBLImportarData = new BLImportarData();
-    public GUIPrimeraFormaNormal() {
+    public GUIPrimeraFormaNormal(ArrayList<Atributo> clavesPrimarias) {
         initComponents();
         this.setLocationRelativeTo(null);
-        objBLImportarData.importarData(this.jTableUniversal);
+        objBLImportarData.importarData(this.jTableUniversal,clavesPrimarias);
     }
+
+    private GUIPrimeraFormaNormal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

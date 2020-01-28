@@ -6,6 +6,7 @@
 package DATA;
 import CLASES.Atributo;
 import CLASES.Entidad;
+import LOGICA.BLImportarData;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -21,12 +22,14 @@ import org.apache.poi.xssf.usermodel.*;
 public class DataImportar {
     
     Workbook book;
+    public static ArrayList<Atributo> atributos= new ArrayList<Atributo>();
     
     public Entidad Importar(File archivo, JTable tabla ){
         String mensaje="Error en la Importacion";
         DefaultTableModel modelo=new DefaultTableModel();
         tabla.setModel(modelo);
         Entidad objEntidad = new Entidad();
+        BLImportarData objBLImportarData = new BLImportarData();
         
         try {
             //CREA ARCHIVO CON EXTENSION XLS Y XLSX
@@ -87,10 +90,14 @@ public class DataImportar {
                     }
                     
                 }
-                objEntidad = new Entidad("Universal", arrayAtributos);
-                
+                  
                 if(IndiceFila!=0)modelo.addRow(ListaColumna);
+
             }
+            objEntidad = new Entidad("Universal", arrayAtributos);
+            for (Atributo objAtributo:arrayAtributos) {
+                    atributos.add(objAtributo);
+                }
             mensaje="Importacion Exitosa";
             
         } catch (Exception e) {

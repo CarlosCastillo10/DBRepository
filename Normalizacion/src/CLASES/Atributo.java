@@ -58,9 +58,15 @@ public class Atributo {
     }
     
     
-     @Override
+    
+    @Override
     public String toString() {
         return String.format("%s", this.getNombre());
     }
-  
+
+//    @Override
+//    public String toString() {
+//        return "Atributo{" + "nombre=" + nombre + ", primaryKey=" + primaryKey + ", valores=" + valores + '}';
+//    }
+//  
 }

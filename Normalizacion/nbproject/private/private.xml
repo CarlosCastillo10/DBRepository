@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/CLASES/Entidad.java</file>
-            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/CLASES/Atributo.java</file>
-            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/CLASES/Data.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/GLOBAL/GlobalVariables.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/GUI/GUIImportarData.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/LOGICA/BLImportarData.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/LOGICA/BLAtributo.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/DATA/DataImportar.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/GUI/GUIPrimeraFormaNormal.java</file>
+            <file>file:/C:/Users/carlo/Desktop/5to%20Ciclo/FUNDAMENTOS%20DE%20BASES%20DE%20DATOS/Segundo%20Bimestre/ProyectoNormalizacion/Normalizacion/src/CLASES/Relacion.java</file>
         </group>
     </open-files>
 </project-private>
